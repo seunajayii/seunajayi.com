@@ -346,6 +346,9 @@ function viewSchool(){
       +"</div>";
   }).join("");
   html+=zone("Per child","Homework, clubs, tests and anything a teacher asked for",'<div class="grid g2">'+cols+"</div>");
+  const unfiled=openItems().filter(i=>!i.kid&&i.kind!=="admin").sort((a,b)=>(a.due||"9999").localeCompare(b.due||"9999"));
+  if(unfiled.length) html+=zone("Not filed to a child","Assign these so they appear on the right child's list",
+    card('<div class="items">'+unfiled.map(i=>itemRow(i)).join("")+"</div>"));
   return html;
 }
 
